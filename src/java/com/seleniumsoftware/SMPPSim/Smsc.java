@@ -669,14 +669,14 @@ public class Smsc {
 
 	public void writeDecodedSme(String request) throws IOException {
 		if (SMPPSim.isCaptureSmeDecoded()) {
-			smeDecoded.write(request + "\n");
+			smeDecoded.write(String.format("_time_=%d,%s\n", System.currentTimeMillis(), request));
 			smeDecoded.flush();
 		}
 	}
 
 	public void writeDecodedSmppsim(String response) throws IOException {
 		if (SMPPSim.isCaptureSmppsimDecoded()) {
-			smppsimDecoded.write(response + "\n");
+			smppsimDecoded.write(String.format("_time_=%d,%s\n", System.currentTimeMillis(), response));
 			smppsimDecoded.flush();
 		}
 	}
