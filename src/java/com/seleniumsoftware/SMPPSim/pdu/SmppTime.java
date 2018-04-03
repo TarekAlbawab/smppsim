@@ -57,12 +57,12 @@ public class SmppTime {
 	// ignored.
 
 	private String milli;	// t plus "00"
-	
+
 	private String dateString;	// Whole field with nn and p sanitised if necessary
-	
+
 	// Equivalent Java date/time
 	private Date datetime;
-	
+
 	public SmppTime(String smppTime) throws ParseException {
 		String st = smppTime;
 		// 050219133817000+
@@ -253,7 +253,7 @@ public class SmppTime {
 	public void setDateString(String string) {
 		dateString = string;
 	}
-	
+
 	public String toString() {
 		return dateString;
 	}

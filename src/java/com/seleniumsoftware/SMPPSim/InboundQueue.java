@@ -292,9 +292,9 @@ public class InboundQueue implements Runnable {
 					 * Should only remove from the queue if we didn't get a response of ESME_RMSGQFUL
 					 * Right now we don't know what the response was in this code... so removal needs to be
 					 * triggered asynchronously by receipt of a DELIVER_SM_RESP in the protocol handler
-					 * 
+					 *
 					 * Sequence number matching required of course.
-					 * 
+					 *
 					 */
 					synchronized (response_queue) {
 						response_queue.add(pdu);

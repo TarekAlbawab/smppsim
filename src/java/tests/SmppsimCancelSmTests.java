@@ -29,7 +29,7 @@ public class SmppsimCancelSmTests extends TestCase {
 
 	/*
 	 * Condition: Basic cancel_sm sent
-	 * 
+	 *
 	 * Expected: No exceptions. ESME_ROK in response. QUERY_SM does not find message after it was cancelled.
 	 */
 
@@ -185,7 +185,7 @@ public class SmppsimCancelSmTests extends TestCase {
 
 	/*
 	 * Condition: cancel_sm with null message_id and specific servicetype, multiple messages matching src and dest addresses
-	 * 
+	 *
 	 * Expected: No exceptions. ESME_ROK in response.
 	 */
 	public void test002CancelSM()
@@ -311,7 +311,7 @@ public class SmppsimCancelSmTests extends TestCase {
 			throw new CancelSmFailedException();
 		}
 
-		// and query them again 
+		// and query them again
 		try {
 			QuerySM request = new QuerySM();
 			QuerySMResp response;
@@ -349,7 +349,7 @@ public class SmppsimCancelSmTests extends TestCase {
 
 	/*
 	 * Condition: cancel_sm with null message_id and null servicetype, multiple messages matching src and dest addresses
-	 * 
+	 *
 	 * Expected: No exceptions. ESME_ROK in response.
 	 */
 	public void test003CancelSM()
@@ -475,7 +475,7 @@ public class SmppsimCancelSmTests extends TestCase {
 			throw new CancelSmFailedException();
 		}
 
-		// and query them again 
+		// and query them again
 		try {
 			QuerySM request = new QuerySM();
 			QuerySMResp response;

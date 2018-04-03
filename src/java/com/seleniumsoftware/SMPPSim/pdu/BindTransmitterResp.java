@@ -55,13 +55,13 @@ public class BindTransmitterResp
 	public byte [] marshall() throws Exception {
 		out.reset();
 		super.prepareHeaderForMarshalling();
-		out.write(PduUtilities.stringToNullTerminatedByteArray(system_id)); 
+		out.write(PduUtilities.stringToNullTerminatedByteArray(system_id));
 		byte [] response = out.toByteArray();
 		int l = response.length;
 		response = PduUtilities.setPduLength(response,l);
 		return response;
 	}
-	
+
 	/**
 	 * *returns String representation of PDU
 	 */

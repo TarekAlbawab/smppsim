@@ -78,10 +78,10 @@ public class LoggingUtilities {
 				line = new StringBuffer();
 				line.append(token);
 				i = 1;
-			}			
+			}
 		}
 		if (line.length() > 0)
-			logger.info(line.toString());			
+			logger.info(line.toString());
 	}
 
 }

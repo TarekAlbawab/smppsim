@@ -64,7 +64,7 @@ public class DataSM extends Request implements Demarshaller, Marshaller {
 	// Optional PDU attributes
 	private HashMap<Short, Tlv> optionalsByTag = new HashMap<Short, Tlv>();
 
-	// output 
+	// output
 	ByteArrayOutputStream out;
 
 	public DataSM() {

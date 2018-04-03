@@ -37,7 +37,7 @@ import java.util.*;
  * @author Martin Woolley
  *
  * Queue of MessageState objects
- * 
+ *
  * Processed by the State Lifecycle Service
  */
 public class OutboundQueue implements Runnable {

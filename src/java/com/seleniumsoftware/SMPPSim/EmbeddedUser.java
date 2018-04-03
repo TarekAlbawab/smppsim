@@ -14,10 +14,10 @@ public class EmbeddedUser {
 
 		SMPPSim smppsim = new SMPPSim();
 		smppsim.start(args[0]);
-		
+
 		// allow SMPPSim to run for 30 seconds then shut it down
 		Thread.sleep(30000);
-		
+
 		Smsc.getInstance().stop();
 
 		logger.info("EmbeddedUser: Exiting");

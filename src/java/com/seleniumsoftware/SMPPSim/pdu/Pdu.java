@@ -36,7 +36,7 @@ abstract public class Pdu implements Serializable {
 
 	// need this for RMI use
 	public Pdu() {
-		
+
 	}
 	// All PDUs have a header
 
@@ -53,7 +53,7 @@ abstract public class Pdu implements Serializable {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * @return
 	 */
@@ -109,7 +109,7 @@ abstract public class Pdu implements Serializable {
 	public void setSeq_no(int i) {
 		seq_no = i;
 	}
-	
+
 	public String toString() {
 		return "cmd_len="+cmd_len+","+
 		"cmd_id="+cmd_id+","+

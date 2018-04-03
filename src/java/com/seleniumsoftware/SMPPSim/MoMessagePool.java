@@ -118,7 +118,7 @@ public class MoMessagePool {
 				destination_addr = rec.substring(commaIX1 + 1, commaIX2);
 				msg = rec.substring(commaIX2 + 1, rec.length());
 				data_coding = 0;
-				if (!msg.startsWith("0x")) 
+				if (!msg.startsWith("0x"))
 					short_message = msg.getBytes();
 				else {
 					try {

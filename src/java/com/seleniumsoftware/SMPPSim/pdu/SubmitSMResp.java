@@ -31,7 +31,7 @@ import com.seleniumsoftware.SMPPSim.pdu.util.PduUtilities;
 
 public class SubmitSMResp extends Response implements Marshaller {
 	private Smsc smsc = Smsc.getInstance();
-	
+
 	String message_id;
 
 	public SubmitSMResp(SubmitSM requestMsg) {
@@ -44,7 +44,7 @@ public class SubmitSMResp extends Response implements Marshaller {
 		setCmd_len(0);
 
 		// message body
-		message_id = smsc.getMessageID();		
+		message_id = smsc.getMessageID();
 	}
 
 	public byte[] marshall() throws Exception {
@@ -69,10 +69,10 @@ public class SubmitSMResp extends Response implements Marshaller {
 	public void setMessage_id(String string) {
 		message_id = string;
 	}
-	
+
 	public String toString() {
 		return super.toString()+","+
-		"message_id="+message_id;		
+		"message_id="+message_id;
 	}
 
 }

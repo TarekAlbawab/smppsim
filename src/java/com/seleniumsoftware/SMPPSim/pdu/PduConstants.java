@@ -128,7 +128,7 @@ public class PduConstants {
 	public static final short USSD_SERVICE_OP = 0x0501;
 
 	public static final short RECEIPTED_MESSAGE_ID = 0x001E;
-	
+
 	public static final short MESSAGE_STATE = 0x0427;
 
 

@@ -29,7 +29,7 @@ public class SmppsimQuerySmTests extends TestCase {
 
 	/*
 	 * Condition: Basic query_sm sent
-	 * 
+	 *
 	 * Expected: No exceptions. ESME_ROK in response.
 	 */
 
@@ -128,7 +128,7 @@ public class SmppsimQuerySmTests extends TestCase {
 				"Unbind operation failed for TX session. " + e.getMessage());
 		}
 	}
-	
+
 	// TODO test message states using DeterministicLifeCycleManager
 
 }

@@ -137,7 +137,7 @@ public class CallbackHandler implements Runnable {
 	private boolean isReceived(byte[] message) {
 		return (message[4] == 0x01);
 	}
-	
+
 	public void setRunning(boolean state) {
 		running = state;
 	}

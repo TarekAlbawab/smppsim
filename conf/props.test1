@@ -106,7 +106,7 @@ CAPTURE_SMPPSIM_DECODED_TO_FILE=smppsim_decoded.capture
 
 # Byte Stream Callback
 #
-# This feature, if enabled, will cause SMPPSim to send PDUs received from the ESME or sent to it 
+# This feature, if enabled, will cause SMPPSim to send PDUs received from the ESME or sent to it
 # as byte streams over a couple of connections.
 # This is intended to be useful in automated testing scenarios where you need to notify the test application
 # with details of what was *actually* received by SMPPSim (or sent by it).
@@ -114,8 +114,8 @@ CAPTURE_SMPPSIM_DECODED_TO_FILE=smppsim_decoded.capture
 # Note that byte streams are prepended by the following fields:
 #
 # a 4 byte integer which indicates the length of the whole callback message
-# a 1 byte indicator of the type of interaction giving rise to the callback, 
-# - where 0x01 means SMPPSim received a request PDU and 
+# a 1 byte indicator of the type of interaction giving rise to the callback,
+# - where 0x01 means SMPPSim received a request PDU and
 #         0x02 means SMPPSim sent a request PDU (e.g. a DeliverSM)
 # a 4 byte fixed length identified, which identifies the SMPPSim instance that sent the bytes
 #

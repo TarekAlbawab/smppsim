@@ -49,14 +49,14 @@ public class SubmitMultiResp extends Response implements Marshaller {
 		// message body
 		message_id = smsc.getMessageID();
 		no_unsuccess = 0;
-		// until we have message state simulator working		
+		// until we have message state simulator working
 	}
 
 	public byte[] marshall() throws Exception {
 		out.reset();
 		UnsuccessSME u = new UnsuccessSME();
 		super.prepareHeaderForMarshalling();
-		
+
 		out.write(PduUtilities.stringToNullTerminatedByteArray(message_id));
 		out.write(PduUtilities.makeByteArrayFromInt(no_unsuccess, 1));
 		for (int i=0;i<no_unsuccess;i++) {
@@ -118,7 +118,7 @@ public class SubmitMultiResp extends Response implements Marshaller {
 			string = string + "<empty>";
 		return string;
 	}
-	
+
 	public String unsuccessSmesToString(UnsuccessSME[] unsuccess_smes) {
 		int l=unsuccess_smes.length;
 		StringBuffer sb = new StringBuffer();

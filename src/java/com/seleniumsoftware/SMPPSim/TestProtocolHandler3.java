@@ -70,9 +70,9 @@ public class TestProtocolHandler3 extends StandardProtocolHandler {
 		long delay=0;
 		double r = Math.random();
 		delay = (long) (120000 * r);
-		
+
 		logger.info("DELAYING RESPONSE BY "+delay+"ms");
-		
+
 		Thread.sleep(delay);
 
 		resp_message = smppresp.marshall();
@@ -80,7 +80,7 @@ public class TestProtocolHandler3 extends StandardProtocolHandler {
 
 		if (smsc.isDecodePdus())
 			LoggingUtilities.logDecodedPdu(smppresp);
-		
+
 		smsc.incSubmitSmOK();
 		connection.writeResponse(resp_message);
 		// If loopback is switched on, have an SMPPReceiver object deliver this message back to the client
@@ -91,7 +91,7 @@ public class TestProtocolHandler3 extends StandardProtocolHandler {
 
 	/**
 	 * Custom variation of submit_multi handler. This implementation will treat
-	 * any non-numeric destinatation address as invalid 
+	 * any non-numeric destinatation address as invalid
 	 */
 	void getSubmitMultiResponse(byte[] message, int len) throws Exception {
 		LoggingUtilities.hexDump("Custom SUBMIT_MULTI:", message, len);

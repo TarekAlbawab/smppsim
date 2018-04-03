@@ -55,7 +55,7 @@ public class SmppsimSubmitMultiTests extends TestCase {
 
 	/*
 	 * Condition: Basic submit_multi sent
-	 * 
+	 *
 	 * Expected: No exceptions. ESME_ROK in response.
 	 */
 
@@ -142,7 +142,7 @@ public class SmppsimSubmitMultiTests extends TestCase {
 
 	/*
 	 * Condition: Basic submit_multi sent
-	 * 
+	 *
 	 * Expected: No exceptions. ESME_ROK in response.
 	 */
 

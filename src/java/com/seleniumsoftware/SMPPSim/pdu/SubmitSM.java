@@ -441,11 +441,11 @@ public class SubmitSM extends Request implements Demarshaller {
 		}
 		return null;
 	}
-	
+
 	public void setOptionals(ArrayList<Tlv> optionals) {
 		this.optionals = optionals;
 	}
-	
+
 	public Tlv getUssd_service_op() {
 		for (Tlv tlv : optionals) {
 			if (tlv.getTag() == PduConstants.USSD_SERVICE_OP) {
@@ -454,5 +454,5 @@ public class SubmitSM extends Request implements Demarshaller {
 		}
 		return null;
 	}
-	
+
 }

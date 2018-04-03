@@ -41,7 +41,7 @@ abstract public class Response extends Pdu implements Marshaller {
 		out.write(PduUtilities.makeByteArrayFromInt(getCmd_status(),4));
 		out.write(PduUtilities.makeByteArrayFromInt(getSeq_no(),4));
 	}
-	
+
 	public byte [] errorResponse(int cmd_id, int cmd_status, int seq_no) throws Exception {
 		out.reset();
 		setCmd_len(16);
@@ -52,7 +52,7 @@ abstract public class Response extends Pdu implements Marshaller {
 		byte [] response = out.toByteArray();
 		return response;
 	}
-	
+
 	public String toString() {
 		return super.toString();
 	}

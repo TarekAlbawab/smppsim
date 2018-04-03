@@ -29,7 +29,7 @@ public class SmppsimReplaceSmTests extends TestCase {
 
 	/*
 	 * Condition: Basic cancel_sm sent
-	 * 
+	 *
 	 * Expected: No exceptions. ESME_ROK in response.
 	 */
 
@@ -82,7 +82,7 @@ public class SmppsimReplaceSmTests extends TestCase {
 			request.setRegisteredDelivery((byte)0);
 			request.setSmDefaultMsgId((byte)0);
 			request.setShortMessage("SUBMIT_SM test using JUnit");
-			
+
 			// TODO just noticed that null in a replacesm attribute means "don't change this attribute"
 
 			// send the request

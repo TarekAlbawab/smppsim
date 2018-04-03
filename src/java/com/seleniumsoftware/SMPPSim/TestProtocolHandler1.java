@@ -113,7 +113,7 @@ public class TestProtocolHandler1 extends StandardProtocolHandler {
 	}
 	/**
 	 * Custom variation of submit_multi handler. This implementation will treat
-	 * any non-numeric destinatation address as invalid 
+	 * any non-numeric destinatation address as invalid
 	 */
 	void getSubmitMultiResponse(byte[] message, int len) throws Exception {
 		LoggingUtilities.hexDump("Custom SUBMIT_MULTI:", message, len);

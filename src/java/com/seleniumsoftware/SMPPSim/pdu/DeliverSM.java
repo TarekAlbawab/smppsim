@@ -238,7 +238,7 @@ public class DeliverSM extends Response implements Marshaller, Cloneable {
 		out.write(PduUtilities.stringToNullTerminatedByteArray(destination_addr));
 
 		//		// start temp code
-		//		
+		//
 		//		byte [] danish_dest_address = { 0x53, 0x74, 0x6F, 0x65, 0x62, (byte) 0xE6, 0x6C, 0x74, 0x00 };
 		//		out.write(danish_dest_address);
 		//		destination_addr="HARD CODED!";

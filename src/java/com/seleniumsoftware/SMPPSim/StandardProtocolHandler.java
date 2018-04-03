@@ -61,7 +61,7 @@ public class StandardProtocolHandler {
 	byte[] message;
 
 	Pattern address_range_regexp = null;
-	
+
 	private long delay;
 	private long delay_delta;
 
@@ -193,7 +193,7 @@ public class StandardProtocolHandler {
 			smsc.incBindTransmitterERR();
 			return;
 		}
-		
+
 		session.setInterface_version(smppmsg.getInterface_version());
 
 		// Authenticate the account details
@@ -466,12 +466,12 @@ public class StandardProtocolHandler {
 		// ....and turn it back into a byte array
 		resp_message = smppresp.marshall();
 
-		
+
 		if (SMPPSim.isSimulate_variable_submit_sm_response_times()) {
 			try {
 				logger.info("Delaying response by "+delay+"ms");
 				Thread.sleep(delay);
-				long per_message_delta = (int) (Math.random() * 500) - 250; // between -250 and 250 or thereabouts 
+				long per_message_delta = (int) (Math.random() * 500) - 250; // between -250 and 250 or thereabouts
 				delay = delay + delay_delta + per_message_delta;
 				if (delay > MAX_DELAY) {
 					delay = MAX_DELAY;
@@ -485,7 +485,7 @@ public class StandardProtocolHandler {
 			} catch (InterruptedException e) {
 			}
 		}
-		
+
 		logPdu(":SUBMIT_SM_RESP:", resp_message, smppresp);
 		logger.info(" ");
 
@@ -990,9 +990,9 @@ public class StandardProtocolHandler {
 			smsc.incDeliverSmOK();
 		else
 			smsc.incDeliverSmERR();
-		
+
 		iqueue.deliveryResult(smppmsg.getSeq_no(), smppmsg.getCmd_status());
-		
+
 		logger.info(" ");
 	}
 

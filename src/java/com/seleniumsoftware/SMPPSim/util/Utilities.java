@@ -22,7 +22,7 @@
  * @author martin@seleniumsoftware.com
  * http://www.woolleynet.com
  * http://www.seleniumsoftware.com
- * 
+ *
  ****************************************************************************/
 
 package com.seleniumsoftware.SMPPSim.util;

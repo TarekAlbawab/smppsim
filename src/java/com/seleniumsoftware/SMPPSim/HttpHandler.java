@@ -42,7 +42,7 @@ import java.text.*;
 /**
  * Class <code>HttpHandler</code> is a very simple http server which provides
  * basic facilities to control and monitor the SMPPSim server
- * 
+ *
  * @author Martin Woolley, www.seleniumsoftware.com
  */
 

@@ -538,7 +538,7 @@ public class SmppsimSubmitSmTests extends TestCase {
 			bb[1] = (byte) 0x05;
 			bb[0] = (byte) 0x06;
 			request.setCallbackNumAtag(new ByteBuffer(bb));
-			
+
 			request.setCallbackNumPresInd((byte) 0x01);
 			request.setDataCoding((byte) 3); //ISO-8859-1
 			request.setDestAddr(destAddress);
@@ -576,7 +576,7 @@ public class SmppsimSubmitSmTests extends TestCase {
 			request.setSarTotalSegments((short) 4);
 			request.setScheduleDeliveryTime("050525161013000+");
 			request.setServiceType(smppServiceType);
-			request.setShortMessage("SUBMIT_SM test including optional parameters");		
+			request.setShortMessage("SUBMIT_SM test including optional parameters");
 			request.setSmDefaultMsgId((byte)0);
 			request.setSmsSignal((short) 10);
 			request.setSourceAddr(srcAddress);

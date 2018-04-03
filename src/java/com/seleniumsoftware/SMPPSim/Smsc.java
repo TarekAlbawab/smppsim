@@ -45,7 +45,7 @@ import java.net.*;
 public class Smsc {
 
 	private static Smsc smsc;
-	
+
 	private boolean running = false;
 
 	private static Socket callback;
@@ -77,15 +77,15 @@ public class Smsc {
 	private MoService ds;
 
 	private Thread deliveryService;
-	
+
 	private Thread delayedInboundQueueThread;
 
 	private InboundQueue iq;
-	
+
 	private OutboundQueue oq;
-	
+
 	private DelayedDrQueue drq;
-	
+
 	private Thread drq_thread;
 
 	private LifeCycleManager lcm;
@@ -179,15 +179,15 @@ public class Smsc {
 	private long dataSmOK = 0;
 
 	private long dataSmERR = 0;
-	
+
 	private long outbindOK = 0;
-	
+
 	private long outbindERR = 0;
-	
+
 	// outbind
-	
+
 	boolean outbind_sent = false;
-	
+
 	private Smsc() {
 	}
 
@@ -200,11 +200,11 @@ public class Smsc {
 	public void start() throws Exception {
 
 		running = true;
-		
+
 		startTime = new Date();
 		SimpleDateFormat df = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss");
 		startTimeString = df.format(startTime);
-		
+
 		message_id = SMPPSim.getStart_at();
 
 		if (SMPPSim.isCallback()) {
@@ -296,7 +296,7 @@ public class Smsc {
 		// LifeCycleService (OutboundQueue) must always be running
 		lifecycleService = new Thread(oq);
 		lifecycleService.start();
-		
+
 		if (SMPPSim.getDelayReceiptsBy() > 0) {
 			logger.info("Starting delivery receipts delay service....");
 			drq = DelayedDrQueue.getInstance();
@@ -306,7 +306,7 @@ public class Smsc {
 	}
 
 	public boolean authenticate(String systemid, String password) {
-		
+
 		for (int i=0;i<SMPPSim.getSystemids().length;i++) {
 			if (SMPPSim.getSystemids()[i].equals(systemid))
 				if (SMPPSim.getPasswords()[i].equals(password))
@@ -314,16 +314,16 @@ public class Smsc {
 				else
 					return false;
 		}
-		return false;		
+		return false;
 	}
 
 	public boolean isValidSystemId(String systemid) {
-		
+
 		for (int i=0;i<SMPPSim.getSystemids().length;i++) {
 			if (SMPPSim.getSystemids()[i].equals(systemid))
 				return true;
 		}
-		return false;		
+		return false;
 	}
 
 	public void connectToCallbackServer(Object mutex) {
@@ -542,7 +542,7 @@ public class Smsc {
 			outbindERR++;
 		}
 	}
-	
+
 	public synchronized void prepareDeliveryReceipt(SubmitSM smppmsg, String messageID, byte state, int sub, int dlvrd, int err) {
 		int esm_class=4;
 		if (state == PduConstants.ENROUTE) {
@@ -564,11 +564,11 @@ public class Smsc {
 		String err_string = "000" + err;
 		err_string = err_string.substring(err_string.length()-3,err_string.length());
 		receipt.setErr(err_string);
-		
+
 		if (SMPPSim.isDlr_tlr_required()) {
 			receipt.addVsop(SMPPSim.getDlr_tlv_tag(), SMPPSim.getDlr_tlv_len(), SMPPSim.getDlr_tlv_value());
 		}
-		
+
 		logger.finest("sm_len=" + smppmsg.getSm_length() + ",message="
 				+ smppmsg.getShort_message());
 		if (smppmsg.getSm_length() > 19)

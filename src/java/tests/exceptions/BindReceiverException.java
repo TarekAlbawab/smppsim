@@ -12,7 +12,7 @@ public class BindReceiverException extends Exception {
 	}
 
 	public BindReceiverException(String message) {
-		super(message); 
+		super(message);
 	}
 
 }

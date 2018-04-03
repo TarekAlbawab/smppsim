@@ -51,7 +51,7 @@ public class Outbind extends Response implements Marshaller {
 		this.system_id = system_id;
 		this.password = password;
 	}
-	
+
 	public byte[] marshall() throws Exception {
 		out.reset();
 		super.prepareHeaderForMarshalling();

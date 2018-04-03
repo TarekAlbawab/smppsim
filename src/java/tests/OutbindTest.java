@@ -36,7 +36,7 @@ public class OutbindTest {
 	int outbindPort = 2776;
 
 	byte[] packetLen = new byte[4];
-	
+
 	byte[] message;
 
 	private static Object mutex = new Object();
@@ -91,7 +91,7 @@ public class OutbindTest {
 				Response response = ((Request)mo).getResponse();
 				session.respond(response);
 			} else
-				got_all_mo = true;			
+				got_all_mo = true;
 		}
 		logger.info("Received "+mo_count+" MO messages");
 		try {

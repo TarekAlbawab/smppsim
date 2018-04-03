@@ -127,7 +127,7 @@ CAPTURE_SMPPSIM_DECODED_TO_FILE=smppsim_decoded.capture
 
 # Byte Stream Callback
 #
-# This feature, if enabled, will cause SMPPSim to send PDUs received from the ESME or sent to it 
+# This feature, if enabled, will cause SMPPSim to send PDUs received from the ESME or sent to it
 # as byte streams over a couple of connections.
 # This is intended to be useful in automated testing scenarios where you need to notify the test application
 # with details of what was *actually* received by SMPPSim (or sent by it).
@@ -135,8 +135,8 @@ CAPTURE_SMPPSIM_DECODED_TO_FILE=smppsim_decoded.capture
 # Note that byte streams are prepended by the following fields:
 #
 # a 4 byte integer which indicates the length of the whole callback message
-# a 1 byte indicator of the type of interaction giving rise to the callback, 
-# - where 0x01 means SMPPSim received a request PDU and 
+# a 1 byte indicator of the type of interaction giving rise to the callback,
+# - where 0x01 means SMPPSim received a request PDU and
 #         0x02 means SMPPSim sent a request PDU (e.g. a DeliverSM)
 # a 4 byte fixed length identified, which identifies the SMPPSim instance that sent the bytes
 #
@@ -149,7 +149,7 @@ CALLBACK_TARGET_HOST=localhost
 CALLBACK_PORT=3333
 
 # USSD support (primitive at this stage)
-# 
+#
 # Relates to the ussd_service_op optional parameter whose values include
 #	0 = PSSD indication
 #	1 = PSSR indication
@@ -163,10 +163,10 @@ CALLBACK_PORT=3333
 # set to true for DELIVER_SM's carrying delivery receipts to include the ussd_service_op optional
 # parameter if the corresponding SUBMIT_SM had this parameter. Value will be set according to the value
 # in the SUBMIT_SM
-# 
+#
 DELIVER_SM_INCLUDES_USSD_SERVICE_OP=false
 
-# DELIVERY_RECEIPT_OPTIONAL_PARAMS : indicates whether or not delivery receipts should include optional TLV parameters per the spec, when the client 
+# DELIVERY_RECEIPT_OPTIONAL_PARAMS : indicates whether or not delivery receipts should include optional TLV parameters per the spec, when the client
 # identifies itself as support version 3.4 or later.
 DELIVERY_RECEIPT_OPTIONAL_PARAMS=true
 

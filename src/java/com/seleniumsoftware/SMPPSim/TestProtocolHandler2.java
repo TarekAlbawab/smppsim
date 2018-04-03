@@ -96,7 +96,7 @@ public class TestProtocolHandler2 extends StandardProtocolHandler {
 	}
 	/**
 	 * Custom variation of submit_multi handler. This implementation will treat
-	 * any non-numeric destinatation address as invalid 
+	 * any non-numeric destinatation address as invalid
 	 */
 	void getSubmitMultiResponse(byte[] message, int len) throws Exception {
 		LoggingUtilities.hexDump("Custom SUBMIT_MULTI:", message, len);
@@ -177,7 +177,7 @@ public class TestProtocolHandler2 extends StandardProtocolHandler {
 		connection.writeResponse(resp_message);
 	}
 
-	
+
 	void getUnbindResponse(byte[] message, int len) throws Exception {
 		LoggingUtilities.hexDump(": UNBIND:", message, len);
 		Unbind smppmsg = new Unbind();

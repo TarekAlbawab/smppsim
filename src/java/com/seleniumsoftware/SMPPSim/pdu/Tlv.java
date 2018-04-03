@@ -31,21 +31,21 @@ import java.io.Serializable;
 import com.seleniumsoftware.SMPPSim.pdu.util.*;
 
 public class Tlv implements Serializable {
-	
+
 	private short tag;
 	private short len;
 	private byte [] value;
-	
+
 	public Tlv() {
-		
+
 	}
-	
+
 	public Tlv(short t, short l, byte[] v) {
 		tag = t;
 		len = l;
 		value = v;
 	}
-	
+
 	/**
 	 * @return Returns the len.
 	 */
@@ -82,7 +82,7 @@ public class Tlv implements Serializable {
 	public void setValue(byte[] value) {
 		this.value = value;
 	}
-	
+
 	public String toString() {
 		return "tag="+tag+",len="+len+",value=0x"+PduUtilities.byteArrayToHexString(value);
 	}

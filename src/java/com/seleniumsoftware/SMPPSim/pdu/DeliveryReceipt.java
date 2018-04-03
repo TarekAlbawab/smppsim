@@ -72,11 +72,11 @@ public class DeliveryReceipt extends DeliverSM {
 		byte [] state_byte = new byte[1];
 		state_byte[0] = state;
 		addVsop(PduConstants.MESSAGE_STATE, (short) 1, state_byte);
-		
+
 		int network_error_code=0x030000; // 0x03 means GSM
 
 		// network_error_code values are not defined in the SMPP spec so two simple values only are hard coded here to support the most basic of testing needs
-		
+
 		switch (state) {
 			case PduConstants.UNDELIVERABLE:
 				// error code of 01 in the last 2 octets
@@ -84,13 +84,13 @@ public class DeliveryReceipt extends DeliverSM {
 				byte [] nec_bytes1 = PduUtilities.makeByteArrayFromInt(network_error_code, 3);
 				addVsop(PduConstants.NETWORK_ERROR_CODE_TAG, (short) 3, nec_bytes1);
 				break;
-			case PduConstants.REJECTED: 
+			case PduConstants.REJECTED:
 				// error code of 02 in the last 2 octets
 				network_error_code = network_error_code | 0x000002;
 				byte [] nec_bytes2 = PduUtilities.makeByteArrayFromInt(network_error_code, 3);
 				addVsop(PduConstants.NETWORK_ERROR_CODE_TAG, (short) 3, nec_bytes2);
 				break;
-		}		
+		}
 	}
 
 	public void setDeliveryReceiptMessage(byte state) {

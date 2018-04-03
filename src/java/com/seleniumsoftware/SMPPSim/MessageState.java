@@ -51,7 +51,7 @@ public class MessageState {
 
 	// other attributes
 	private byte state;
-	
+
 	private int err;
 
 	private boolean responseSent = false;

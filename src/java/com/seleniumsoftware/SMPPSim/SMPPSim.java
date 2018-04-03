@@ -665,7 +665,7 @@ public class SMPPSim {
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public static void incrementBoundReceiverCount() {
 		boundReceiverCount++;
