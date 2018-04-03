@@ -30,49 +30,49 @@ import com.seleniumsoftware.SMPPSim.*;
 import com.seleniumsoftware.SMPPSim.pdu.util.PduUtilities;
 
 public class SubmitSMResp extends Response implements Marshaller {
-	private Smsc smsc = Smsc.getInstance();
+    private Smsc smsc = Smsc.getInstance();
 
-	String message_id;
+    String message_id;
 
-	public SubmitSMResp(SubmitSM requestMsg) {
-		// message header fields except message length
-		setCmd_id(PduConstants.SUBMIT_SM_RESP);
-		setCmd_status(PduConstants.ESME_ROK);
-		setSeq_no(requestMsg.getSeq_no());
-		// Set message length to zero since actual length will not be known until the object is
-		// converted back to a message complete with null terminated strings
-		setCmd_len(0);
+    public SubmitSMResp(SubmitSM requestMsg) {
+        // message header fields except message length
+        setCmd_id(PduConstants.SUBMIT_SM_RESP);
+        setCmd_status(PduConstants.ESME_ROK);
+        setSeq_no(requestMsg.getSeq_no());
+        // Set message length to zero since actual length will not be known until the object is
+        // converted back to a message complete with null terminated strings
+        setCmd_len(0);
 
-		// message body
-		message_id = smsc.getMessageID();
-	}
+        // message body
+        message_id = smsc.getMessageID();
+    }
 
-	public byte[] marshall() throws Exception {
-		out.reset();
-		super.prepareHeaderForMarshalling();
-		out.write(PduUtilities.stringToNullTerminatedByteArray(message_id));
-		byte[] response = out.toByteArray();
-		int l = response.length;
-		response = PduUtilities.setPduLength(response, l);
-		return response;
-	}
-	/**
-	 * @return
-	 */
-	public String getMessage_id() {
-		return message_id;
-	}
+    public byte[] marshall() throws Exception {
+        out.reset();
+        super.prepareHeaderForMarshalling();
+        out.write(PduUtilities.stringToNullTerminatedByteArray(message_id));
+        byte[] response = out.toByteArray();
+        int l = response.length;
+        response = PduUtilities.setPduLength(response, l);
+        return response;
+    }
+    /**
+     * @return
+     */
+    public String getMessage_id() {
+        return message_id;
+    }
 
-	/**
-	 * @param string
-	 */
-	public void setMessage_id(String string) {
-		message_id = string;
-	}
+    /**
+     * @param string
+     */
+    public void setMessage_id(String string) {
+        message_id = string;
+    }
 
-	public String toString() {
-		return super.toString()+","+
-		"message_id="+message_id;
-	}
+    public String toString() {
+        return super.toString()+","+
+        "message_id="+message_id;
+    }
 
 }

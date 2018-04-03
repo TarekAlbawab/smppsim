@@ -28,59 +28,59 @@
 package com.seleniumsoftware.SMPPSim;
 
 public class Session {
-	private boolean isBound = false;
-	private boolean isReceiver = false;
-	private boolean isTransmitter = false;
-	private int interface_version;
+    private boolean isBound = false;
+    private boolean isReceiver = false;
+    private boolean isTransmitter = false;
+    private int interface_version;
 
-	public Session() {
-	}
-	/**
-	 * @return
-	 */
-	public boolean isBound() {
-		return isBound;
-	}
+    public Session() {
+    }
+    /**
+     * @return
+     */
+    public boolean isBound() {
+        return isBound;
+    }
 
-	/**
-	 * @return
-	 */
-	public boolean isReceiver() {
-		return isReceiver;
-	}
+    /**
+     * @return
+     */
+    public boolean isReceiver() {
+        return isReceiver;
+    }
 
-	/**
-	 * @return
-	 */
-	public boolean isTransmitter() {
-		return isTransmitter;
-	}
+    /**
+     * @return
+     */
+    public boolean isTransmitter() {
+        return isTransmitter;
+    }
 
-	/**
-	 * @param b
-	 */
-	public void setBound(boolean b) {
-		isBound = b;
-	}
+    /**
+     * @param b
+     */
+    public void setBound(boolean b) {
+        isBound = b;
+    }
 
-	/**
-	 * @param b
-	 */
-	public void setReceiver(boolean b) {
-		isReceiver = b;
-	}
+    /**
+     * @param b
+     */
+    public void setReceiver(boolean b) {
+        isReceiver = b;
+    }
 
-	/**
-	 * @param b
-	 */
-	public void setTransmitter(boolean b) {
-		isTransmitter = b;
-	}
-	public int getInterface_version() {
-		return interface_version;
-	}
-	public void setInterface_version(int interfaceVersion) {
-		interface_version = interfaceVersion;
-	}
+    /**
+     * @param b
+     */
+    public void setTransmitter(boolean b) {
+        isTransmitter = b;
+    }
+    public int getInterface_version() {
+        return interface_version;
+    }
+    public void setInterface_version(int interfaceVersion) {
+        interface_version = interfaceVersion;
+    }
 
 }

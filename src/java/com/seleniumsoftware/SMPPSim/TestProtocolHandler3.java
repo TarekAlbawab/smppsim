@@ -34,179 +34,179 @@ import java.util.*;
 import java.util.logging.*;
 
 public class TestProtocolHandler3 extends StandardProtocolHandler {
-	private static Logger logger = Logger.getLogger("com.seleniumsoftware.smppsim");
+    private static Logger logger = Logger.getLogger("com.seleniumsoftware.smppsim");
 
-	public TestProtocolHandler3() {
-	}
+    public TestProtocolHandler3() {
+    }
 
-	public String getName() {
-		return ("TestProtocolHandler1");
-	}
+    public String getName() {
+        return ("TestProtocolHandler1");
+    }
 
-	/**
-	 * Custom variation of submitSM handler. This implementation will vary its response time
-	 * with a delay varying from 0 to 120 seconds
-	 */
-	void getSubmitSMResponse(byte[] message, int len) throws Exception {
-		LoggingUtilities.hexDump("Custom SUBMIT_SM:", message, len);
-		byte[] resp_message;
-		SubmitSM smppmsg = new SubmitSM();
-		smppmsg.demarshall(message);
-		if (smsc.isDecodePdus())
-			LoggingUtilities.logDecodedPdu(smppmsg);
+    /**
+     * Custom variation of submitSM handler. This implementation will vary its response time
+     * with a delay varying from 0 to 120 seconds
+     */
+    void getSubmitSMResponse(byte[] message, int len) throws Exception {
+        LoggingUtilities.hexDump("Custom SUBMIT_SM:", message, len);
+        byte[] resp_message;
+        SubmitSM smppmsg = new SubmitSM();
+        smppmsg.demarshall(message);
+        if (smsc.isDecodePdus())
+            LoggingUtilities.logDecodedPdu(smppmsg);
 
-		// now make the response object
+        // now make the response object
 
-		SubmitSMResp smppresp = new SubmitSMResp(smppmsg);
+        SubmitSMResp smppresp = new SubmitSMResp(smppmsg);
 
-		// Validate session
-		if ((!session.isBound()) || (!session.isTransmitter())) {
-			logger.warning("Invalid bind state. Must be bound as transmitter for this PDU");
-			wasInvalidBindState = true;
-			smsc.incSubmitSmERR();
-			connection.writeResponse(smppresp.errorResponse(smppresp.getCmd_id(), PduConstants.ESME_RINVBNDSTS, smppresp.getSeq_no()));
-		}
+        // Validate session
+        if ((!session.isBound()) || (!session.isTransmitter())) {
+            logger.warning("Invalid bind state. Must be bound as transmitter for this PDU");
+            wasInvalidBindState = true;
+            smsc.incSubmitSmERR();
+            connection.writeResponse(smppresp.errorResponse(smppresp.getCmd_id(), PduConstants.ESME_RINVBNDSTS, smppresp.getSeq_no()));
+        }
 
-		long delay=0;
-		double r = Math.random();
-		delay = (long) (120000 * r);
+        long delay=0;
+        double r = Math.random();
+        delay = (long) (120000 * r);
 
-		logger.info("DELAYING RESPONSE BY "+delay+"ms");
+        logger.info("DELAYING RESPONSE BY "+delay+"ms");
 
-		Thread.sleep(delay);
+        Thread.sleep(delay);
 
-		resp_message = smppresp.marshall();
-		LoggingUtilities.hexDump("SUBMIT_SM_RESP:", resp_message, resp_message.length);
+        resp_message = smppresp.marshall();
+        LoggingUtilities.hexDump("SUBMIT_SM_RESP:", resp_message, resp_message.length);
 
-		if (smsc.isDecodePdus())
-			LoggingUtilities.logDecodedPdu(smppresp);
+        if (smsc.isDecodePdus())
+            LoggingUtilities.logDecodedPdu(smppresp);
 
-		smsc.incSubmitSmOK();
-		connection.writeResponse(resp_message);
-		// If loopback is switched on, have an SMPPReceiver object deliver this message back to the client
-		if (SMPPSim.isLoopback()) {
-			smsc.doLoopback(smppmsg);
-		}
-	}
+        smsc.incSubmitSmOK();
+        connection.writeResponse(resp_message);
+        // If loopback is switched on, have an SMPPReceiver object deliver this message back to the client
+        if (SMPPSim.isLoopback()) {
+            smsc.doLoopback(smppmsg);
+        }
+    }
 
-	/**
-	 * Custom variation of submit_multi handler. This implementation will treat
-	 * any non-numeric destinatation address as invalid
-	 */
-	void getSubmitMultiResponse(byte[] message, int len) throws Exception {
-		LoggingUtilities.hexDump("Custom SUBMIT_MULTI:", message, len);
-		byte[] resp_message;
-		SubmitMulti smppmsg = new SubmitMulti();
-		smppmsg.demarshall(message);
+    /**
+     * Custom variation of submit_multi handler. This implementation will treat
+     * any non-numeric destinatation address as invalid
+     */
+    void getSubmitMultiResponse(byte[] message, int len) throws Exception {
+        LoggingUtilities.hexDump("Custom SUBMIT_MULTI:", message, len);
+        byte[] resp_message;
+        SubmitMulti smppmsg = new SubmitMulti();
+        smppmsg.demarshall(message);
 
-		// now make the response object
+        // now make the response object
 
-		SubmitMultiResp smppresp = new SubmitMultiResp(smppmsg);
+        SubmitMultiResp smppresp = new SubmitMultiResp(smppmsg);
 
-		// Validate session
-		if ((!session.isBound()) || (!session.isTransmitter())) {
-			logger.warning("Invalid bind state. Must be bound as transmitter for this PDU");
-			wasInvalidBindState = true;
-			smsc.incSubmitMultiERR();
-			connection.writeResponse(smppresp.errorResponse(smppresp.getCmd_id(), PduConstants.ESME_RINVBNDSTS, smppresp.getSeq_no()));
-		}
+        // Validate session
+        if ((!session.isBound()) || (!session.isTransmitter())) {
+            logger.warning("Invalid bind state. Must be bound as transmitter for this PDU");
+            wasInvalidBindState = true;
+            smsc.incSubmitMultiERR();
+            connection.writeResponse(smppresp.errorResponse(smppresp.getCmd_id(), PduConstants.ESME_RINVBNDSTS, smppresp.getSeq_no()));
+        }
 
-		// Validate each destination address
-		int dests = smppmsg.getNumber_of_dests();
-		DestAddress[] da = smppmsg.getDest_addresses();
-		DestAddressSME sme = new DestAddressSME();
-		ArrayList<UnsuccessSME> usmes = new ArrayList<UnsuccessSME>();
-		String dest;
-		boolean containedFailures = false;
-		for (int i = 0; i < dests; i++) {
-			if (da[i] instanceof DestAddressSME) {
-				sme = (DestAddressSME) da[i];
-				dest = sme.getSme_address();
-				try {
-					long n = Long.parseLong(dest);
-				} catch (NumberFormatException nfe) {
-					// MSISDN treated as invalid
-					logger.warning("'Invalid' MSISDN " + sme.getSme_ton() + "," + sme.getSme_npi() + "," + dest
-							+ ". This protocol handler treats non-numeric MSISDN as invalid for testing purposes");
-					UnsuccessSME usme = new UnsuccessSME(sme.getSme_ton(), sme.getSme_npi(), sme.getSme_address(), PduConstants.ESME_RINVDSTADR);
-					containedFailures = true;
-					usmes.add(usme);
-				}
-			}
-		}
-		int u = usmes.size();
-		UnsuccessSME[] usmea = new UnsuccessSME[u];
-		for (int i = 0; i < u; i++) {
-			usmea[i] = usmes.get(i);
-		}
-		smppresp.setUnsuccess_smes(usmea);
+        // Validate each destination address
+        int dests = smppmsg.getNumber_of_dests();
+        DestAddress[] da = smppmsg.getDest_addresses();
+        DestAddressSME sme = new DestAddressSME();
+        ArrayList<UnsuccessSME> usmes = new ArrayList<UnsuccessSME>();
+        String dest;
+        boolean containedFailures = false;
+        for (int i = 0; i < dests; i++) {
+            if (da[i] instanceof DestAddressSME) {
+                sme = (DestAddressSME) da[i];
+                dest = sme.getSme_address();
+                try {
+                    long n = Long.parseLong(dest);
+                } catch (NumberFormatException nfe) {
+                    // MSISDN treated as invalid
+                    logger.warning("'Invalid' MSISDN " + sme.getSme_ton() + "," + sme.getSme_npi() + "," + dest
+                            + ". This protocol handler treats non-numeric MSISDN as invalid for testing purposes");
+                    UnsuccessSME usme = new UnsuccessSME(sme.getSme_ton(), sme.getSme_npi(), sme.getSme_address(), PduConstants.ESME_RINVDSTADR);
+                    containedFailures = true;
+                    usmes.add(usme);
+                }
+            }
+        }
+        int u = usmes.size();
+        UnsuccessSME[] usmea = new UnsuccessSME[u];
+        for (int i = 0; i < u; i++) {
+            usmea[i] = usmes.get(i);
+        }
+        smppresp.setUnsuccess_smes(usmea);
 
-		// ....and turn it back into a byte array
-		resp_message = smppresp.marshall();
+        // ....and turn it back into a byte array
+        resp_message = smppresp.marshall();
 
-		LoggingUtilities.hexDump("SUBMIT_MULTI_RESP:", resp_message, resp_message.length);
-		if (!containedFailures)
-			smsc.incSubmitMultiOK();
-		else
-			smsc.incSubmitMultiERR();
+        LoggingUtilities.hexDump("SUBMIT_MULTI_RESP:", resp_message, resp_message.length);
+        if (!containedFailures)
+            smsc.incSubmitMultiOK();
+        else
+            smsc.incSubmitMultiERR();
 
-		connection.writeResponse(resp_message);
-	}
+        connection.writeResponse(resp_message);
+    }
 
-	void getUnbindResponse(byte[] message, int len) throws Exception {
-		LoggingUtilities.hexDump(": UNBIND:", message, len);
-		Unbind smppmsg = new Unbind();
-		byte[] resp_message;
-		smppmsg.demarshall(message);
-		if (smsc.isDecodePdus())
-			LoggingUtilities.logDecodedPdu(smppmsg);
-		smsc.writeDecodedSme(smppmsg.toString());
-		logger.info(" ");
-		// now make the response object
-		UnbindResp smppresp = new UnbindResp(smppmsg);
+    void getUnbindResponse(byte[] message, int len) throws Exception {
+        LoggingUtilities.hexDump(": UNBIND:", message, len);
+        Unbind smppmsg = new Unbind();
+        byte[] resp_message;
+        smppmsg.demarshall(message);
+        if (smsc.isDecodePdus())
+            LoggingUtilities.logDecodedPdu(smppmsg);
+        smsc.writeDecodedSme(smppmsg.toString());
+        logger.info(" ");
+        // now make the response object
+        UnbindResp smppresp = new UnbindResp(smppmsg);
 
-		// Validate session
-		if (!session.isBound()) {
-			logger.warning("Invalid bind state. Must be bound for this PDU");
-			wasInvalidBindState = true;
-			resp_message = smppresp.errorResponse(smppresp.getCmd_id(),
-					PduConstants.ESME_RINVBNDSTS, smppresp.getSeq_no());
-			logPdu(": UNBIND (ESME_RINVBNDSTS):", resp_message, smppresp);
-			connection.writeResponse(resp_message);
-			smsc.writeDecodedSmppsim(smppresp.toString());
-			smsc.incUnbindERR();
-			return;
-		}
+        // Validate session
+        if (!session.isBound()) {
+            logger.warning("Invalid bind state. Must be bound for this PDU");
+            wasInvalidBindState = true;
+            resp_message = smppresp.errorResponse(smppresp.getCmd_id(),
+                    PduConstants.ESME_RINVBNDSTS, smppresp.getSeq_no());
+            logPdu(": UNBIND (ESME_RINVBNDSTS):", resp_message, smppresp);
+            connection.writeResponse(resp_message);
+            smsc.writeDecodedSmppsim(smppresp.toString());
+            smsc.incUnbindERR();
+            return;
+        }
 
-		// ....and turn it back into a byte array
+        // ....and turn it back into a byte array
 
-		resp_message = smppresp.marshall();
+        resp_message = smppresp.marshall();
 
-		if (session.isReceiver()) {
-			smsc.receiverUnbound();
-		}
-		logger.finest("Receiver:" + session.isReceiver() + ",Transmitter:"
-				+ session.isTransmitter());
-		if (session.isReceiver() && session.isTransmitter())
-			smsc.setTrxBoundCount(smsc.getTrxBoundCount() - 1);
-		else if (session.isReceiver())
-			smsc.setRxBoundCount(smsc.getRxBoundCount() - 1);
-		else {
-			smsc.setTxBoundCount(smsc.getTxBoundCount() - 1);
-		}
-		session.setBound(false);
-		session.setReceiver(false);
-		session.setTransmitter(false);
-		wasUnbindRequest = true;
-		LoggingUtilities.hexDump(": UNBIND_RESP", resp_message,
-				resp_message.length);
-		if (smsc.isDecodePdus())
-			LoggingUtilities.logDecodedPdu(smppresp);
-		logger.info(" ");
-		smsc.incUnbindOK();
-		connection.writeResponse(resp_message);
-		smsc.writeDecodedSmppsim(smppresp.toString());
-	}
+        if (session.isReceiver()) {
+            smsc.receiverUnbound();
+        }
+        logger.finest("Receiver:" + session.isReceiver() + ",Transmitter:"
+                + session.isTransmitter());
+        if (session.isReceiver() && session.isTransmitter())
+            smsc.setTrxBoundCount(smsc.getTrxBoundCount() - 1);
+        else if (session.isReceiver())
+            smsc.setRxBoundCount(smsc.getRxBoundCount() - 1);
+        else {
+            smsc.setTxBoundCount(smsc.getTxBoundCount() - 1);
+        }
+        session.setBound(false);
+        session.setReceiver(false);
+        session.setTransmitter(false);
+        wasUnbindRequest = true;
+        LoggingUtilities.hexDump(": UNBIND_RESP", resp_message,
+                resp_message.length);
+        if (smsc.isDecodePdus())
+            LoggingUtilities.logDecodedPdu(smppresp);
+        logger.info(" ");
+        smsc.incUnbindOK();
+        connection.writeResponse(resp_message);
+        smsc.writeDecodedSmppsim(smppresp.toString());
+    }
 
 
 }

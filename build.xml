@@ -20,8 +20,8 @@
         description="Compile the project" >
       <!-- Compile the java code from ${src} into ${build} -->
       <javac srcdir="${src}" destdir="${classes}" classpath="${classpath}">
-  			<compilerarg value="-Xlint:unchecked"/>
-	  </javac>
+            <compilerarg value="-Xlint:unchecked"/>
+      </javac>
   </target>
 
   <target name="jar" depends="compile">
